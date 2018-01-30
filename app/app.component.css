@@ -1,0 +1,117 @@
+.dimension-pallette {
+	overflow: auto;
+    border: 1px solid #ccc;
+    width: 25%;
+    height: 70%;
+	display: inline-block;
+    padding: 6px;
+    top: 0px;
+	background: none repeat scroll 0 0 #E6E6D2;
+}
+.container {
+	height: 84%;
+}
+.dimension-pallette .container{
+    height: calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: -webkit-calc(100% - 40px);
+    overflow-y: scroll;
+    background: ivory;
+    padding: 3px 6px;
+}
+.dimension-pallette .dim-group {
+	padding: 3px 6px;
+}
+.dimension-pallette .dim-group .level-name{
+	display: inline-block;
+	width: calc(100% - 40px);
+    width: -webkit-calc(100% - 40px);
+    width: -moz-calc(100% - 40px);
+}
+.dimension-pallette .dim-group .level-container{
+	padding: 3px 14px;
+}
+.dimension-pallette .dim-group .level-container:hover{
+	background: #E6E6D2;
+	cursor: pointer;
+}
+.dimension-pallette .dim-group .level-container .circle{	
+	display: inline-block;
+    padding: 4px 4px;
+    width: 2px;
+    border-radius: 100%;
+    webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #8C8585;
+    webkit-border-radius: 55px;
+    -moz-border-radius: 55px;
+    border-radius: 55px;
+	cursor: default;
+    margin: auto;
+    display: inline-block;
+    height: 100%;
+    float: left;
+	top: 8px;
+    left: -6px;
+	position: relative;
+}
+.dimension-pallette .dim-group .level-container .circle.circle-dimension{
+    background: #16EC16;
+    -webkit-box-shadow: 0px 0px 0.5px green;
+    -moz-box-shadow: 0px 0px 0.5px green;
+    box-shadow: 0px 0px 0.5px green;
+}
+.dimension-pallette .dim-group .level-container .circle.circle-disabled{
+    background-color: #8C8585 !important;
+}
+.dimension-pallette .dim-group .level-container .circle.circle-measure{
+	background: yellow;
+    -webkit-box-shadow: 0px 0px 0.5px olive;
+    -moz-box-shadow: 0px 0px 0.5px olive;
+    box-shadow: 0px 0px 0.5px olive;
+}
+.dimension-pallette .dim-group .level-container .circle.circle-dimension.circle-time{
+    background: #29ebff;
+	box-shadow: 0px 0px 0.5px #204a87;
+}
+.droppable-container{
+    width: 50%;
+    height: 70%;
+    position: relative;
+    display: inline-block;
+}
+.droppable-area {
+	height: 80%;
+	width: 100%;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    position: relative;
+    margin: 0;
+    top: 0;
+    overflow: auto;
+    color: black;
+    display: inline-block;
+}
+.droppable-area .group{
+	border: 1px solid #C5C5C5;
+    padding: 4px 10px;
+	color: #666;
+	margin: 2px 3px;
+	cursor: default;
+	display: inline-block;
+    position: relative;
+    box-shadow: 2px 2px 3px #ddd;
+}
+.droppable-area .group.tuple{
+    background: #C4DC91;
+}
+.droppable-area  .tuple .title, .droppable-area .kpi .title{
+}
+.droppable-area .group .remove-icon {
+	cursor: pointer;
+}
+.droppable-area .group.kpi{
+    background: #FFE241;
+}

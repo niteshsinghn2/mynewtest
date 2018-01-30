@@ -1,0 +1,70 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h2>Here are some palettes to help you start: </h2>
+<!-- [(ngModel)]="selectedSchema"-->
+<div class="col-md-12">
+	<div class="col-md-5" style="padding: 0;">
+		<span>List of schemas</span>
+		<select class="form-control" (change)="setSelectedSchema()" [(ngModel)]="selectedSchema">
+			<option *ngFor="let schema of listOfSchemas" [ngValue]="schema">
+				{{schema.schemaCaption}}
+			</option>
+		</select>
+		<button class="btn btn-primary" style="position:absolute;right: -100px;top: 18px;cursor: pointer;" (click)="resetAll()">Reset</button>
+	</div>
+	
+	<div class="form-group">
+		<label for="query">Query:</label>
+		<textarea class="form-control" rows="2" [value]="cubeQuery"></textarea>
+    </div>
+</div>
+<div class="col-md-12 container" >
+	<div class="dimension-pallette col-sm-5">
+		<input type="text" class="form-control" [(ngModel)]="searchKey" (input)="filterDimPalette($event.target.value)" placeholder="Search"/>
+		<div class="container">
+			<div *ngFor="let gr of json.palette.groups" class="dim-group">
+			   <span class="group-header"> {{gr.groupName}}</span>
+			   <div draggable class="level-container" *ngFor="let lev of gr.levels" [dragData]="{'level': lev, 'group': gr,'isKpi':false}" (dblclick)="addTuple({'level': lev, 'group': gr,'isKpi':false}, 'rowTuple')">
+					<span class="circle circle-dimension" [class.circle-disabled]="!lev.attributes[0].mappedToPhysical" [class.circle-time]="gr.groupType == 'time'" title="Dimension"></span>
+					<span class="level-name">{{lev.name}}</span>
+				</div>
+			 </div>  
+			  
+			<div *ngFor="let gr of json.palette.kpiGroups" class="dim-group">
+				<span class="group-header"> {{gr.groupName}}</span>
+				<div class="level-container" draggable *ngFor="let lev of gr.kpi " [dragData]="{'kpi': lev, 'group': gr,'isKpi':true}" (dblclick)="addKpi({'kpi': lev, 'group': gr,'isKpi':true})">
+					<span class="circle circle-measure" [class.circle-disabled]="!lev.mappedToPhysical" title="Measure"></span>
+					<span class="level-name">{{lev.kpiName}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="droppable-container col-sm-7">
+		<div class="col-md-12" style="height: 50%;">
+			<span>Rows [Double click or drag dimensions to add on rows]</span>
+			<div class="droppable-area" droppable (onDrop)="onTupleDrop($event, 'rowTuple')" (onDragOver)="onDragOver($event,'tuple')">
+				<span class="group tuple" *ngFor="let el of inputJson.rowTuple;let i = index" draggable [dragData]>
+					<span class="title" [title]="el.caption">{{el.caption}}</span>
+					<span class="remove-icon  fa fa-times-circle text-danger" (click)="removeElem(i, 'rowTuple')"></span>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-12" hidden>
+			<span>Columns [Drag dimensions to add on columns]</span>
+			<div class="droppable-area" droppable (onDrop)="onTupleDrop($event, 'colTuple')" (onDragOver)="onDragOver($event,'tuple')">
+				<span class="group tuple" *ngFor="let el of inputJson.colTuple;let i = index" draggable>
+					<span class="title" [title]="el.caption">{{el.caption}}</span>
+					<span class="remove-icon  fa fa-times-circle text-danger" (click)="removeElem(i, 'colTuple')"></span>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-12" style="height: 50%;">
+			<span>KPIs [Double click or drag measures]</span>
+			<div class="droppable-area" droppable (onDrop)="onKpiDrop($event)" (onDragOver)="onDragOver($event,'kpi')">
+				<span class="group kpi" *ngFor="let el of inputJson.kpis;let i = index" draggable [dragData]>
+					<span class="title" [title]="el.caption">{{el.caption}}</span>
+					<span class="remove-icon fa fa-times-circle text-danger" (click)="removeElem(i, 'kpis')"></span>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
